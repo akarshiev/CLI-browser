@@ -12,13 +12,13 @@ Tarmoqlarda protokollar qatlam (layer) shaklida ishlaydi:
 
 ```
 ┌─────────────────────────┐
-│   Ilova qatlami         │  ← HTTP, FTP, SMTP, DNS
+│   Ilova qatlami         │  <- HTTP, FTP, SMTP, DNS
 ├─────────────────────────┤
-│   Transport qatlami     │  ← TCP, UDP
+│   Transport qatlami     │  <- TCP, UDP
 ├─────────────────────────┤
-│   Internet qatlami      │  ← IP
+│   Internet qatlami      │  <- IP
 ├─────────────────────────┤
-│   Tarmoq kirish qatlami │  ← Ethernet, Wi-Fi
+│   Tarmoq kirish qatlami │  <- Ethernet, Wi-Fi
 └─────────────────────────┘
 ```
 
@@ -37,15 +37,7 @@ Browser veb-sahifani so'rashdan oldin:
 1. **Domain nomini IP manzilga aylantiradi** (DNS orqali)
 2. **TCP ulanishini ochadi** server bilan (3 bosqichli handshake)
 
-```
-Client                          Server
-  │                               │
-  │──── SYN (1) ────────────────>│
-  │<─── SYN-ACK (2) ────────────│
-  │──── ACK (3) ────────────────>│
-  │                               │
-  │    TCP ulanish tayyor!        │
-```
+![HTTP Request over tcp connections](https://miro.medium.com/v2/resize:fit:1400/1*0eJLdKsz58XoJsg-aSrvUg.png)
 
 Buni terminalda `nc` (netcat) orqali ko'rishingiz mumkin:
 
@@ -153,7 +145,7 @@ Connection: close
 ```
 HTTP/1.1 200 OK
 Content-Type: text/html
-                          ← Bu bo'sh qator headerlarni body'dan ajratadi
+                          // Bu bo'sh qator headerlarni body'dan ajratadi
 <html><body>Salom</body></html>
 ```
 
@@ -170,8 +162,8 @@ Body bo'lishi mumkin:
 **HTTP stateless** — har bir so'rov mustaqil. Server oldingi so'rovlarni eslab qolmaydi.
 
 ```
-So'rov 1: GET /login     → Server javob berdi ✓
-So'rov 2: GET /dashboard → Server: "Siz kimsiz?" ❌
+So'rov 1: GET /login     // Server javob berdi
+So'rov 2: GET /dashboard // Server: "Siz kimsiz?"
 ```
 
 Bu soddalik va masshtablilik uchun qilingan. Lekin muammo tug'diradi: foydalanuvchilar qanday kirib qoladi?
@@ -197,10 +189,10 @@ Cookie'lar browserda saqlanadi va har bir so'rov bilan avtomatik yuboriladi.
 **Session** — server tomonida saqlanadigan tushuncha. Server foydalanuvchi ma'lumotlarini xotirada/bazada saqlaydi va session ID (cookie'da saqlanadi) orqali topadi.
 
 ```
-Foydalanuvchi kiradi → Server session yaratadi (xotirada saqlaydi)
-                    → Server session_id cookie'sini browserga yuboradi
-Browser cookie yuboradi → Server session ma'lumotlarini topadi
-                       → Siz kimligingizni biladi!
+Foydalanuvchi kiradi -> Server session yaratadi (xotirada saqlaydi)
+                    -> Server session_id cookie'sini browserga yuboradi
+Browser cookie yuboradi -> Server session ma'lumotlarini topadi
+                       -> Siz kimligingizni biladi!
 ```
 
 Cheklov: server qayta ishga tushsa, barcha sessiyalar yo'qoladi (agar bazaga saqlanmasa).
@@ -299,11 +291,11 @@ body = resp[idx+4:]
 ```
 Browser so'raydi:                    Server javob beradi:
                                 
-1. DNS izlash                        → IP manzil
-2. TCP ulanish (3 bosqichli)         → Ulanish tayyor
-3. HTTP so'rovni yuborish            → So'rovni qayta ishlash
-4. HTTP javobni qabul qilish         → Javobni yuborish
-5. Headerlar + body ni parse qilish  → Kontentni ko'rsatish
+1. DNS izlash                        -> IP manzil
+2. TCP ulanish (3 bosqichli)         -> Ulanish tayyor
+3. HTTP so'rovni yuborish            -> So'rovni qayta ishlash
+4. HTTP javobni qabul qilish         -> Javobni yuborish
+5. Headerlar + body ni parse qilish  -> Kontentni ko'rsatish
 ```
 
 Butun internet — har bir veb-sayt, har bir API, har bir ilova — TCP ustidagi oddiy so'rov/javob sikli asosida qurilgan.

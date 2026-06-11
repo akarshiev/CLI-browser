@@ -107,21 +107,21 @@ def main():
     url = sys.argv[1]
     host, path, port = parse_url(url)
 
-    print(f"🔗 {host}:{port}{path} ga ulanmoqda...")
+    print(f"{host}:{port}{path} ga ulanmoqda...")
 
     try:
         headers, body = fetch(host, path, port)
     except Exception as e:
-        print(f"❌ Xatolik: {e}")
+        print(f"Xatol {e}")
         sys.exit(1)
 
     print(f"\n{'='*60}")
-    print("📋 HEADERS")
+    print("HEADERS")
     print('='*60)
     print(headers)
 
     print(f"\n{'='*60}")
-    print("📄 BODY")
+    print("BODY")
     print('='*60)
     print(strip_html(body))
 

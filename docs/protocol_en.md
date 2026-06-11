@@ -12,13 +12,13 @@ In networking, the most important protocols are layered:
 
 ```
 ┌─────────────────────────┐
-│   Application Layer     │  ← HTTP, FTP, SMTP, DNS
+│   Application Layer     │  <- HTTP, FTP, SMTP, DNS
 ├─────────────────────────┤
-│   Transport Layer       │  ← TCP, UDP
+│   Transport Layer       │  <- TCP, UDP
 ├─────────────────────────┤
-│   Internet Layer        │  ← IP
+│   Internet Layer        │  -< IP
 ├─────────────────────────┤
-│   Network Access Layer  │  ← Ethernet, Wi-Fi
+│   Network Access Layer  │  <- Ethernet, Wi-Fi
 └─────────────────────────┘
 ```
 
@@ -37,15 +37,8 @@ Before a browser can request a webpage, it must:
 1. **Resolve** the domain name to an IP address (via DNS)
 2. **Open a TCP connection** to the server (3-way handshake)
 
-```
-Client                          Server
-  │                               │
-  │──── SYN (1) ────────────────>│
-  │<─── SYN-ACK (2) ────────────│
-  │──── ACK (3) ────────────────>│
-  │                               │
-  │    TCP Connection Ready!      │
-```
+![HTTP Request over tcp connections](https://miro.medium.com/v2/resize:fit:1400/1*0eJLdKsz58XoJsg-aSrvUg.png)
+
 
 You can see this yourself using `nc` (netcat) in a terminal:
 
@@ -153,7 +146,7 @@ The **body** is the actual content the server sends back. Between headers and bo
 ```
 HTTP/1.1 200 OK
 Content-Type: text/html
-                          ← This blank line separates headers from body
+                          // This blank line separates headers from body
 <html><body>Hello</body></html>
 ```
 
@@ -170,8 +163,8 @@ The body can be:
 **HTTP is stateless** — each request is independent. The server does NOT remember previous requests.
 
 ```
-Request 1: GET /login     → Server responds ✓
-Request 2: GET /dashboard → Server: "Who are you?" ❌
+Request 1: GET /login     // Server responds
+Request 2: GET /dashboard // Server: "Who are you?"
 ```
 
 This is by design for simplicity and scalability. But it creates a problem: how do you keep users logged in?
@@ -197,10 +190,10 @@ Cookies are stored by the browser and sent with every request to that domain.
 A **session** is a server-side concept. The server stores user data in memory/database, and uses a session ID (stored in a cookie) to look it up.
 
 ```
-User logs in → Server creates session (stores in memory)
-             → Server sends session_id cookie to browser
-Browser sends cookie → Server looks up session data
-                     → Knows who you are!
+User logs in -> Server creates session (stores in memory)
+             -> Server sends session_id cookie to browser
+Browser sends cookie -> Server looks up session data
+                     -> Knows who you are!
 ```
 
 The limitation: if the server restarts, all sessions are lost (unless persisted to a database).
@@ -299,14 +292,14 @@ body = resp[idx+4:]
 ```
 Browser asks:                    Server answers:
                                 
-1. DNS lookup                    → IP address
-2. TCP connect (3-way handshake) → Connection ready
-3. Send HTTP request             → Process request
-4. Receive HTTP response         → Send response
-5. Parse headers + body          → Display content
+1. DNS lookup                    -> IP address
+2. TCP connect (3-way handshake) -> Connection ready
+3. Send HTTP request             -> Process request
+4. Receive HTTP response         -> Send response
+5. Parse headers + body          -> Display content
 ```
 
-The entire web — every website, every API, every app — is built on this simple request/response cycle over TCP.
+The entire web - every website, every API, every app - is built on this simple request/response cycle over TCP.
 
 ---
 

@@ -1,4 +1,4 @@
-# 🌐 CLI Browser — Browser Qanday Ishlaydi?
+# CLI Browser — Browser Qanday Ishlaydi?
 
 > Python va Go orqali yozilgan oddiy CLI browser. HTTP protokolini tushunish uchun amaliy qo'llanma.
 
@@ -7,7 +7,7 @@
 Browser — bu murakkab dastur. Lekin uning asosi juda oddiy:
 
 ```
-TCP ulanish → HTTP so'rov yuborish → Javobni o'qish → Ko'rsatish
+TCP ulanish -> HTTP so'rov yuborish -> Javobni o'qish -> Ko'rsatish
 ```
 
 Bu loyiha shu jarayonni qo'lda amalga oshiradi.

@@ -89,12 +89,12 @@ func main() {
 	raw := os.Args[1]
 	host, path, port := parseURL(raw)
 
-	fmt.Printf("🔗 %s:%s%s ga ulanmoqda...\n", host, port, path)
+	fmt.Printf("%s:%s%s ga ulanmoqda...\n", host, port, path)
 
 	// 1. TCP socket ochish
 	conn, err := net.Dial("tcp", host+":"+port)
 	if err != nil {
-		fmt.Printf("❌ Xatolik: %v\n", err)
+		fmt.Printf("Xatolik %v\n", err)
 		os.Exit(1)
 	}
 	defer conn.Close()
@@ -113,7 +113,7 @@ func main() {
 	// 3. Request yuborish
 	_, err = conn.Write([]byte(request))
 	if err != nil {
-		fmt.Printf("❌ Xatolik: %v\n", err)
+		fmt.Printf("Xato%v\n", err)
 		os.Exit(1)
 	}
 
@@ -144,12 +144,12 @@ func main() {
 	}
 
 	fmt.Printf("\n%s\n", strings.Repeat("=", 60))
-	fmt.Println("📋 HEADERS")
+	fmt.Println("HEADERS")
 	fmt.Println(strings.Repeat("=", 60))
 	fmt.Println(headers)
 
 	fmt.Printf("\n%s\n", strings.Repeat("=", 60))
-	fmt.Println("📄 BODY")
+	fmt.Println("BODY")
 	fmt.Println(strings.Repeat("=", 60))
 	fmt.Println(stripHTML(body))
 }
