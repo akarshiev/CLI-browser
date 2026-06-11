@@ -2,7 +2,7 @@ import socket
 
 host = input("Host: ")
 
-client = socket.socket()
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((host, 80))
 
 request = (
