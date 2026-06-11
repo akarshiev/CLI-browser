@@ -269,8 +269,14 @@ request := fmt.Sprintf(
 // 3-qadam: So'rovni yuborish
 conn.Write([]byte(request))
 
-// 4-qadam: To'liq javobni o'qish
-body, _ := io.ReadAll(conn)
+// 4-qadam: To'liq javobni o'qish (loop orqali)
+buffer := make([]byte, 4096)
+var response strings.Builder
+for {
+    n, err := conn.Read(buffer)
+    if n > 0 { response.Write(buffer[:n]) }
+    if err != nil { break }
+}
 
 // 5-qadam: Headerlarni body'dan ajratish
 idx := strings.Index(resp, "\r\n\r\n")

@@ -269,8 +269,14 @@ request := fmt.Sprintf(
 // Step 3: Send request
 conn.Write([]byte(request))
 
-// Step 4: Read full response
-body, _ := io.ReadAll(conn)
+// Step 4: Read full response (loop)
+buffer := make([]byte, 4096)
+var response strings.Builder
+for {
+    n, err := conn.Read(buffer)
+    if n > 0 { response.Write(buffer[:n]) }
+    if err != nil { break }
+}
 
 // Step 5: Split headers from body
 idx := strings.Index(resp, "\r\n\r\n")
